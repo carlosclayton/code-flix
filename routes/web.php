@@ -15,9 +15,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+//Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+// Password Reset Routes...
+Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+
+
 
 
 Route::group([
@@ -39,8 +47,9 @@ Route::group([
     ], function(){
         Route::name('logout')->post('logout', 'Auth\LoginController@logout');
         Route::get('dashboard', function(){
-            return "Dashboard admin";
+            return view('admin.dashboard');
         });
+        Route::resource('users', 'UsersController');
     });
 });
 

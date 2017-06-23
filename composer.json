@@ -6,8 +6,12 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
+        "barryvdh/laravel-ide-helper": "^2.1",
+        "doctrine/dbal": "~2.3",
+        "kris/laravel-form-builder": "1.11.0",
         "laravel/framework": "5.4.*",
-        "laravel/tinker": "~1.0"
+        "laravel/tinker": "~1.0",
+        "patricktalmadge/bootstrapper": "5.10"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -40,6 +44,8 @@
         ],
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
+            "php artisan ide-helper:generate",
+            "php artisan ide-helper:meta",
             "php artisan optimize"
         ]
     },
